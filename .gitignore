@@ -1,0 +1,7 @@
+.venv/
+__pycache__/
+*.pyc
+data/temp/*.wav
+data/state.json
+server.out.log
+server.err.log
