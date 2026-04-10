@@ -15,151 +15,7 @@
     <div id="ffmpegStatus" class="status-pill status-warn">FFmpeg kontrol ediliyor...</div>
   </header>
 
-  <section class="panel config-panel">
-    <div class="phase-stack">
-      <section class="phase-section phase-accuracy">
-        <header class="phase-head">
-          <h2>Phase 1: Accuracy</h2>
-          <span class="phase-pill">Top Priority</span>
-        </header>
-        <div class="phase-grid">
-          <div class="pipeline-card">
-            <h3>Format Standard</h3>
-            <label>
-              Sample Rate
-              <input id="sampleRate" type="number" min="22050" step="1" />
-            </label>
-            <label>
-              Bit Depth
-              <select id="bitDepth">
-                <option value="24">24-bit</option>
-                <option value="16">16-bit</option>
-              </select>
-            </label>
-            <label>
-              High-pass (Hz)
-              <input id="highpassHz" type="number" min="0" step="1" />
-            </label>
-          </div>
-
-          <div class="pipeline-card">
-            <h3>Loudness Normalize</h3>
-            <label>
-              LUFS (Music)
-              <input id="lufsMusic" type="number" step="0.1" />
-            </label>
-            <label>
-              LUFS (SFX)
-              <input id="lufsSfx" type="number" step="0.1" />
-            </label>
-          </div>
-
-          <div class="pipeline-card">
-            <h3>True Peak Limiter</h3>
-            <label>
-              Peak (dBTP)
-              <input id="peakDb" type="number" step="0.1" />
-            </label>
-          </div>
-
-          <div class="pipeline-card">
-            <h3>Silence Trim</h3>
-            <label class="checkbox-inline">
-              <input id="trimSilence" type="checkbox" />
-              Enable Trim Silence
-            </label>
-            <label>
-              Trim Threshold (dB)
-              <input id="trimDb" type="number" step="1" />
-            </label>
-          </div>
-
-          <div class="pipeline-card pipeline-card-wide">
-            <h3>Quick QC</h3>
-            <div class="pipeline-actions">
-              <button id="runQuickQcBtn" disabled>Run Quick QC (Selected File)</button>
-            </div>
-            <div class="qc-grid">
-              <span class="qc-item" id="qcDurationLabel">Duration: --</span>
-              <span class="qc-item" id="qcFormatLabel">Format: --</span>
-              <span class="qc-item" id="qcMaxLabel">Max Volume: --</span>
-              <span class="qc-item" id="qcMeanLabel">Mean Volume: --</span>
-              <span class="qc-item" id="qcClipLabel">Clipping Risk: --</span>
-              <span class="qc-item" id="qcFadeLabel">Effective Fade In: --</span>
-            </div>
-            <div class="qc-status" id="qcStatusLabel">QC status: idle</div>
-          </div>
-        </div>
-      </section>
-
-      <section class="phase-section phase-control">
-        <header class="phase-head">
-          <h2>Phase 2: Control</h2>
-          <span class="phase-pill">In Progress</span>
-        </header>
-        <div class="phase-grid">
-          <div class="pipeline-card">
-            <h3>Global Fade Control</h3>
-            <label>
-              Global Fade In (ms)
-              <input id="fadeInMs" type="number" min="0" step="1" />
-            </label>
-            <label>
-              Global Fade Out (ms)
-              <input id="fadeOutMs" type="number" min="0" step="1" />
-            </label>
-            <p class="pipeline-note">Per-file override is available in Selected File Fade panel.</p>
-          </div>
-
-          <div class="pipeline-card">
-            <h3>Selection Workflow</h3>
-            <p class="pipeline-note">Use timeline Start/End handles + selection loop to validate transitions before render.</p>
-            <p class="pipeline-note">Original/Processed preview panels support A/B listening.</p>
-          </div>
-        </div>
-      </section>
-
-      <section class="phase-section phase-prod">
-        <header class="phase-head">
-          <h2>Phase 3: Production</h2>
-          <span class="phase-pill">Next</span>
-        </header>
-        <div class="phase-grid">
-          <div class="pipeline-card">
-            <h3>Batch Render & Preset</h3>
-            <label>
-              Input Folder
-              <input id="inputDir" type="text" />
-            </label>
-            <label>
-              Output Folder
-              <input id="outputDir" type="text" />
-            </label>
-            <label>
-              Preset
-              <select id="preset">
-                <option value="music">Music / Ambience</option>
-                <option value="sfx">SFX / One-shot</option>
-              </select>
-            </label>
-            <div class="pipeline-actions">
-              <button id="saveConfigBtn">Save Config</button>
-              <button id="scanBtn">Scan Folder</button>
-              <button id="processApprovedBtn" class="accent">Process Approved</button>
-              <button id="processAllBtn">Process All</button>
-            </div>
-          </div>
-
-          <div class="pipeline-card">
-            <h3>Release Checklist</h3>
-            <p class="pipeline-note">Bus templates, manifest export and Unity import preset automation are the next production gates.</p>
-          </div>
-        </div>
-      </section>
-    </div>
-  </section>
-
-  <section class="layout">
+  <section class="workspace">
     <aside class="panel list-panel">
       <div class="panel-head">
         <h2>Files</h2>
@@ -177,14 +33,8 @@
       <div id="fileList" class="file-list"></div>
     </aside>
 
-    <main class="panel detail-panel">
-      <div class="panel-head">
-        <h2 id="selectedName">No selection</h2>
-        <div class="meta">
-          <span id="selectedInfo">--</span>
-        </div>
-      </div>
-
+    <div class="right-stack">
+      <main class="panel detail-panel">
       <div class="wave-wrap">
         <canvas id="waveformCanvas"></canvas>
       </div>
@@ -197,6 +47,13 @@
         <span id="trimRemovedLabel">Removed: 00:00.000</span>
         <span id="playheadLabel">Now: 00:00.000</span>
         <button id="resetTrimBtn">Reset Cursor</button>
+      </div>
+
+      <div class="panel-head">
+        <h2 id="selectedName">No selection</h2>
+        <div class="meta">
+          <span id="selectedInfo">--</span>
+        </div>
       </div>
 
       <div class="file-fade-panel">
@@ -237,15 +94,162 @@
         <button id="previewBtn" disabled>Render Preview</button>
         <button id="loopSelectionBtn" disabled>Play Selection Loop</button>
       </div>
-
-      <div class="job-wrap">
-        <div class="progress-line">
-          <div id="jobProgressBar" class="progress-bar"></div>
-        </div>
-        <div id="jobStatus" class="job-status">No active job.</div>
-        <div id="jobErrors" class="job-errors"></div>
-      </div>
     </main>
+
+      <section class="panel config-panel">
+        <div class="phase-stack">
+          <section class="phase-section phase-accuracy">
+            <header class="phase-head">
+              <h2>Phase 1: Accuracy</h2>
+              <span class="phase-pill">Top Priority</span>
+            </header>
+            <div class="phase-grid">
+              <div class="pipeline-card">
+                <h3>Format Standard</h3>
+                <label>
+                  Sample Rate
+                  <input id="sampleRate" type="number" min="22050" step="1" />
+                </label>
+                <label>
+                  Bit Depth
+                  <select id="bitDepth">
+                    <option value="24">24-bit</option>
+                    <option value="16">16-bit</option>
+                  </select>
+                </label>
+                <label>
+                  High-pass (Hz)
+                  <input id="highpassHz" type="number" min="0" step="1" />
+                </label>
+              </div>
+
+              <div class="pipeline-card">
+                <h3>Loudness Normalize</h3>
+                <label>
+                  LUFS (Music)
+                  <input id="lufsMusic" type="number" step="0.1" />
+                </label>
+                <label>
+                  LUFS (SFX)
+                  <input id="lufsSfx" type="number" step="0.1" />
+                </label>
+              </div>
+
+              <div class="pipeline-card">
+                <h3>True Peak Limiter</h3>
+                <label>
+                  Peak (dBTP)
+                  <input id="peakDb" type="number" step="0.1" />
+                </label>
+              </div>
+
+              <div class="pipeline-card">
+                <h3>Silence Trim</h3>
+                <label class="checkbox-inline">
+                  <input id="trimSilence" type="checkbox" />
+                  Enable Trim Silence
+                </label>
+                <label>
+                  Trim Threshold (dB)
+                  <input id="trimDb" type="number" step="1" />
+                </label>
+              </div>
+
+              <div class="pipeline-card pipeline-card-wide">
+                <h3>Quick QC</h3>
+                <div class="pipeline-actions">
+                  <button id="runQuickQcBtn" disabled>Run Quick QC (Selected File)</button>
+                </div>
+                <div class="qc-grid">
+                  <span class="qc-item" id="qcDurationLabel">Duration: --</span>
+                  <span class="qc-item" id="qcFormatLabel">Format: --</span>
+                  <span class="qc-item" id="qcMaxLabel">Max Volume: --</span>
+                  <span class="qc-item" id="qcMeanLabel">Mean Volume: --</span>
+                  <span class="qc-item" id="qcClipLabel">Clipping Risk: --</span>
+                  <span class="qc-item" id="qcFadeLabel">Effective Fade In: --</span>
+                </div>
+                <div class="qc-status" id="qcStatusLabel">QC status: idle</div>
+              </div>
+            </div>
+          </section>
+
+          <section class="phase-section phase-control">
+            <header class="phase-head">
+              <h2>Phase 2: Control</h2>
+              <span class="phase-pill">In Progress</span>
+            </header>
+            <div class="phase-grid">
+              <div class="pipeline-card">
+                <h3>Global Fade Control</h3>
+                <label>
+                  Global Fade In (ms)
+                  <input id="fadeInMs" type="number" min="0" step="1" />
+                </label>
+                <label>
+                  Global Fade Out (ms)
+                  <input id="fadeOutMs" type="number" min="0" step="1" />
+                </label>
+                <p class="pipeline-note">Per-file override is available in Selected File Fade panel.</p>
+              </div>
+
+              <div class="pipeline-card">
+                <h3>Selection Workflow</h3>
+                <p class="pipeline-note">Use timeline Start/End handles + selection loop to validate transitions before render.</p>
+                <p class="pipeline-note">Original/Processed preview panels support A/B listening.</p>
+              </div>
+            </div>
+          </section>
+
+          <section class="phase-section phase-prod">
+            <header class="phase-head">
+              <h2>Phase 3: Production</h2>
+              <span class="phase-pill">Next</span>
+            </header>
+            <div class="phase-grid">
+              <div class="pipeline-card">
+                <h3>Batch Render & Preset</h3>
+                <label>
+                  Input Folder
+                  <input id="inputDir" type="text" />
+                </label>
+                <label>
+                  Output Folder
+                  <input id="outputDir" type="text" />
+                </label>
+                <label>
+                  Preset
+                  <select id="preset">
+                    <option value="music">Music / Ambience</option>
+                    <option value="sfx">SFX / One-shot</option>
+                  </select>
+                </label>
+                <div class="pipeline-actions">
+                  <button id="saveConfigBtn">Save Config</button>
+                  <button id="scanBtn">Scan Folder</button>
+                  <button id="processApprovedBtn" class="accent">Process Approved</button>
+                  <button id="processAllBtn">Process All</button>
+                </div>
+              </div>
+
+              <div class="pipeline-card">
+                <h3>Release Checklist</h3>
+                <p class="pipeline-note">Bus templates, manifest export and Unity import preset automation are the next production gates.</p>
+              </div>
+            </div>
+          </section>
+        </div>
+      </section>
+    </div>
+  </section>
+
+  <section class="panel active-job-panel">
+    <div class="job-wrap">
+      <div class="progress-line">
+        <div id="jobProgressBar" class="progress-bar"></div>
+      </div>
+      <div id="jobStatus" class="job-status">No active job.</div>
+      <div id="jobErrors" class="job-errors"></div>
+    </div>
   </section>
 
   <script src="/static/app.js"></script>

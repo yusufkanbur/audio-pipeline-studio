@@ -81,7 +81,7 @@ body {
 }
 
 .config-panel {
-  margin-bottom: 12px;
+  margin-bottom: 0;
 }
 
 .phase-stack {
@@ -255,9 +255,16 @@ button.accent {
   border-color: #a78b4a;
 }
 
-.layout {
+.workspace {
   display: grid;
-  grid-template-columns: minmax(320px, 36%) 1fr;
+  grid-template-columns: minmax(320px, 34%) 1fr;
+  gap: 12px;
+  align-items: start;
+}
+
+.right-stack {
+  display: flex;
+  flex-direction: column;
   gap: 12px;
 }
 
@@ -285,7 +292,7 @@ button.accent {
 .list-panel {
   display: flex;
   flex-direction: column;
-  min-height: 640px;
+  min-height: 760px;
 }
 
 #searchInput {
@@ -354,7 +361,7 @@ button.accent {
 }
 
 .detail-panel {
-  min-height: 640px;
+  min-height: 420px;
 }
 
 .wave-wrap {
@@ -460,9 +467,13 @@ audio {
 }
 
 .job-wrap {
-  margin-top: 14px;
-  border-top: 1px solid var(--line);
-  padding-top: 10px;
+  margin-top: 0;
+  border-top: none;
+  padding-top: 0;
+}
+
+.active-job-panel {
+  margin-top: 12px;
 }
 
 .progress-line {
@@ -505,8 +516,12 @@ audio {
 }
 
 @media (max-width: 1024px) {
-  .layout {
+  .workspace {
     grid-template-columns: 1fr;
+  }
+
+  .list-panel {
+    min-height: 460px;
   }
 
   .players {
