@@ -1,96 +1,8 @@
 # Audio Pipeline Studio
 
-English and Japanese documentation are shown directly on this GitHub page.
+Japanese and English documentation are shown directly on this GitHub page.
 
-[English](#english) | [日本語](#日本語) | [日本語 only](README.ja.md)
-
----
-
-## English
-
-Audio Pipeline Studio is a local web UI for reviewing, approving, previewing, and batch-processing audio files with FFmpeg.
-
-It is designed for game-audio and production workflows where you want to inspect waveforms, compare original and processed audio, adjust fades/trims, and render approved files into a normalized output folder.
-
-### Documentation Languages
-
-This repository welcomes visitors with both English and Japanese documentation in the root `README.md`.
-
-- English: [README.md#english](#english)
-- Japanese: [README.md#日本語](#日本語)
-- Japanese-only file: [README.ja.md](README.ja.md)
-
-The documentation language does not change your audio processing settings or FFmpeg behavior.
-
-### Features
-
-- Scan an input folder for `.wav`, `.mp3`, `.flac`, `.ogg`, `.m4a`, and `.aac` files.
-- Review audio with waveform visualization.
-- Approve or unapprove files before batch rendering.
-- Render processed previews before committing a batch.
-- Process approved files or all scanned files.
-- Preserve input folder structure under the output folder.
-- Run local-only FFmpeg processing through a Flask UI.
-- Upload and process a single audio file through the browser.
-- Switch the application UI between English and Japanese.
-
-### Requirements
-
-- Python 3.10 or newer
-- FFmpeg and FFprobe available through one of these options:
-  - `FFMPEG_PATH` / `FFPROBE_PATH` environment variables
-  - system `PATH`
-  - `imageio-ffmpeg` fallback for FFmpeg
-
-### Quick Start
-
-```powershell
-git clone https://github.com/yusufkanbur/audio-pipeline-studio.git
-cd audio-pipeline-studio
-.\run.ps1
-```
-
-Open:
-
-```text
-http://127.0.0.1:5177
-```
-
-### Configuration
-
-The app stores local runtime state under `data/state.json`, which is intentionally ignored by Git.
-
-Optional environment variables:
-
-```powershell
-$env:APS_INPUT_DIR = "C:\path\to\audio\input"
-$env:APS_OUTPUT_DIR = "C:\path\to\audio\output"
-$env:APS_HOST = "127.0.0.1"
-$env:APS_PORT = "5177"
-$env:FFMPEG_PATH = "C:\tools\ffmpeg\bin\ffmpeg.exe"
-$env:FFPROBE_PATH = "C:\tools\ffmpeg\bin\ffprobe.exe"
-```
-
-Without `APS_INPUT_DIR` and `APS_OUTPUT_DIR`, the app defaults to local project folders named `input` and `output`.
-
-### Processing Presets
-
-- `Music / Ambience`: high-pass, loudness normalization, fades, limiter.
-- `SFX / One-shot`: optional trim, loudness normalization, fades, limiter.
-
-### Security Model
-
-Audio Pipeline Studio is intended as a local developer tool. By default it binds to `127.0.0.1`.
-
-Do not expose it directly to the public internet without adding authentication, request limits, and deployment hardening.
-
-### Contributing
-
-Contributions are welcome. Please read [CONTRIBUTING.md](CONTRIBUTING.md) and [SECURITY.md](SECURITY.md) before opening larger changes.
-
-### License
-
-This project is open source under the [MIT License](LICENSE).
+[日本語](#日本語) | [English](#english) | [日本語 only](README.ja.md)
 
 ---
 
@@ -104,8 +16,8 @@ Audio Pipeline Studio は、FFmpeg を使って音声ファイルを確認、承
 
 このリポジトリのルート `README.md` では、英語と日本語のドキュメントを同じ GitHub ページ上で表示します。
 
-- 英語: [README.md#english](#english)
 - 日本語: [README.md#日本語](#日本語)
+- 英語: [README.md#english](#english)
 - 日本語のみ: [README.ja.md](README.ja.md)
 
 ドキュメントの言語を変更しても、音声処理設定や FFmpeg の動作は変わりません。
@@ -182,3 +94,91 @@ Audio Pipeline Studio はローカル開発ツールとして想定されてい�
 ### ライセンス
 
 このプロジェクトは [MIT License](LICENSE) のもとで公開されています。
+
+---
+
+## English
+
+Audio Pipeline Studio is a local web UI for reviewing, approving, previewing, and batch-processing audio files with FFmpeg.
+
+It is designed for game-audio and production workflows where you want to inspect waveforms, compare original and processed audio, adjust fades/trims, and render approved files into a normalized output folder.
+
+### Documentation Languages
+
+This repository welcomes visitors with both English and Japanese documentation in the root `README.md`.
+
+- Japanese: [README.md#日本語](#日本語)
+- English: [README.md#english](#english)
+- Japanese-only file: [README.ja.md](README.ja.md)
+
+The documentation language does not change your audio processing settings or FFmpeg behavior.
+
+### Features
+
+- Scan an input folder for `.wav`, `.mp3`, `.flac`, `.ogg`, `.m4a`, and `.aac` files.
+- Review audio with waveform visualization.
+- Approve or unapprove files before batch rendering.
+- Render processed previews before committing a batch.
+- Process approved files or all scanned files.
+- Preserve input folder structure under the output folder.
+- Run local-only FFmpeg processing through a Flask UI.
+- Upload and process a single audio file through the browser.
+- Switch the application UI between English and Japanese.
+
+### Requirements
+
+- Python 3.10 or newer
+- FFmpeg and FFprobe available through one of these options:
+  - `FFMPEG_PATH` / `FFPROBE_PATH` environment variables
+  - system `PATH`
+  - `imageio-ffmpeg` fallback for FFmpeg
+
+### Quick Start
+
+```powershell
+git clone https://github.com/yusufkanbur/audio-pipeline-studio.git
+cd audio-pipeline-studio
+.\run.ps1
+```
+
+Open:
+
+```text
+http://127.0.0.1:5177
+```
+
+### Configuration
+
+The app stores local runtime state under `data/state.json`, which is intentionally ignored by Git.
+
+Optional environment variables:
+
+```powershell
+$env:APS_INPUT_DIR = "C:\path\to\audio\input"
+$env:APS_OUTPUT_DIR = "C:\path\to\audio\output"
+$env:APS_HOST = "127.0.0.1"
+$env:APS_PORT = "5177"
+$env:FFMPEG_PATH = "C:\tools\ffmpeg\bin\ffmpeg.exe"
+$env:FFPROBE_PATH = "C:\tools\ffmpeg\bin\ffprobe.exe"
+```
+
+Without `APS_INPUT_DIR` and `APS_OUTPUT_DIR`, the app defaults to local project folders named `input` and `output`.
+
+### Processing Presets
+
+- `Music / Ambience`: high-pass, loudness normalization, fades, limiter.
+- `SFX / One-shot`: optional trim, loudness normalization, fades, limiter.
+
+### Security Model
+
+Audio Pipeline Studio is intended as a local developer tool. By default it binds to `127.0.0.1`.
+
+Do not expose it directly to the public internet without adding authentication, request limits, and deployment hardening.
+
+### Contributing
+
+Contributions are welcome. Please read [CONTRIBUTING.md](CONTRIBUTING.md) and [SECURITY.md](SECURITY.md) before opening larger changes.
+
+### License
+
+This project is open source under the [MIT License](LICENSE).
